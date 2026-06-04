@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>{{.title}}</h1>
+    <a href="/users/new">Add new user</a>
+    <a href="/posts/new">Add new post</a>
+    {{range .posts}}
+        <div class="post">
+            <h1>{{.Title}}</h1>
+            <h3>Created by: {{.Author.Username}}</h3>
+            <p><small>{{.CreatedAt.Format "Jan 02, 2006 at 15:04"}}</small></p>
+            <a href="/posts/{{.ID}}">Read more</a>   
+            <form action="/posts/{{.ID}}/delete" method="POST" style="display:inline;">
+                <button type="submit" style="color: red; cursor: pointer;">Delete Post</button>
+            </form>     
+        </div>
+    {{end}}
+</body>
+</html>
