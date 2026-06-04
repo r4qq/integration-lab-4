@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>{{.title}}</title>
+</head>
+<body>
+    <h1>{{.title}}</h1>
+    <form action="/posts/new" method="post">
+        <select name="user" id="user">
+        {{range .usersList}}
+            <option value="{{.Username}}" id="{{.Username}}">{{.Username}}</option>
+        {{end}}
+        </select>
+        <br>
+        <input type="text" name="title" id="" placeholder="Title">
+        <br>
+        <textarea name="body" id="">Write something here.</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    {{if .error}}
+        <p>{{.error}}</p>
+    {{end}}
+</body>
+</html>

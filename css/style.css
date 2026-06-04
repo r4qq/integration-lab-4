@@ -1,0 +1,33 @@
+body {
+    font-family: Arial;
+    max-width: 800px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+    color: #333; 
+}
+
+.post {
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 20px; 
+    margin-bottom: 20px; 
+    background-color: #fcfcfc; 
+}
+
+.post-body {
+    border: 1px solid #ddd;
+}
+
+input[type="text"], textarea {
+    display: block; 
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    min-height: 150px; 
+    resize: vertical; 
+}
