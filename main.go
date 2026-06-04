@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -29,6 +31,28 @@ type User struct {
 	gorm.Model        // dodaje automatycznie pola id, createdAt, updatedAt, deletedAt
 	Username   string `gorm:"unique;not null" form:"user"`
 	Posts      []Post
+}
+
+// struktura przechowująca konfigurację bazy danych
+type DBconfig struct {
+	Host     string
+	User     string
+	Password string
+	Name     string
+	Port     string
+}
+
+func LoadConfig() string {
+	db := &DBconfig{
+		Host:     os.Getenv("DB_HOST"),
+		User:     os.Getenv("DB_USER"),
+		Password: os.Getenv("DB_PASSWORD"),
+		Name:     os.Getenv("DB_NAME"),
+		Port:     os.Getenv("DB_PORT"),
+	}
+
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		db.Host, db.User, db.Password, db.Name, db.Port)
 }
 
 // obsługa i generowanie strony głównej (wszystkie posty)
@@ -118,11 +142,13 @@ func renderError(c *gin.Context, status int, message string) {
 }
 
 // helper do generowania połączenia z bazą
-func setupDatabase(dsn string) *gorm.DB {
+func setupDatabase() *gorm.DB {
 	var err error
 	var db *gorm.DB
 
-	db, err = gorm.Open(sqlite.Open("posts.db"), &gorm.Config{})
+	dsn := LoadConfig()
+
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("connection to db failed: %v", err)
 	}
