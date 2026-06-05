@@ -3,4 +3,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-CMD ["go", "run", "main.go"]
+
+RUN go build -ldflags="-s -w" -o server main.go
+
+CMD ["./server"]
