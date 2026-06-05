@@ -241,5 +241,11 @@ func main() {
 		})
 	})
 
-	router.Run("0.0.0.0:8000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		// Jeśli środowisko nie podało portu (np. na Twoim komputerze), użyj domyślnego
+		port = "8000"
+	}
+
+	router.Run(fmt.Sprint("0.0.0.0:", port))
 }
