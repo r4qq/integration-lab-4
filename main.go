@@ -103,7 +103,7 @@ func (e *Env) createPost(c *gin.Context) {
 	var post Post
 	if err := c.ShouldBind(&post); err != nil {
 		log.Printf("%s", err.Error())
-		renderError(c, http.StatusAlreadyReported, err.Error())
+		renderError(c, http.StatusBadRequest, err.Error())
 		return
 	}
 

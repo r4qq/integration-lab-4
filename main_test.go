@@ -159,7 +159,7 @@ func TestMain(t *testing.T) {
 
 		router.ServeHTTP(w, req)
 
-		//sprawdzenie zwrócony kod http to 302
+		//sprawdzenie zwrócony kod http to 400
 		assert.Equal(t, http.StatusBadRequest, w.Code)
 	})
 }
