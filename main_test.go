@@ -145,7 +145,7 @@ func TestMain(t *testing.T) {
 		assert.NoError(t, err)
 	})
 
-	t.Run("POST /posts/new z pustym tytułem", func(t *testing.T) {
+	t.Run("POST /posts/new z pustym polem title", func(t *testing.T) {
 		//dane do testowego "formularza"
 		formData := url.Values{}
 		formData.Set("user", "0")
