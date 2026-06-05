@@ -20,8 +20,8 @@ type Env struct {
 // struktura będąca jednocześnie modelem posta dla db
 type Post struct {
 	gorm.Model        // dodaje automatycznie pola id, createdAt, updatedAt, deletedAt
-	Title      string `gorm:"type:text;not null" form:"title"`
-	Body       string `gorm:"type:text;not null" form:"body"`
+	Title      string `gorm:"type:text;not null" form:"title" binding:"required"`
+	Body       string `gorm:"type:text;not null" form:"body"  binding:"required"`
 	UserID     uint
 	Author     User `gorm:"foreignKey:UserID"`
 }
@@ -29,7 +29,7 @@ type Post struct {
 // struktura będąca jednocześnie modelem użytkownika dla db
 type User struct {
 	gorm.Model        // dodaje automatycznie pola id, createdAt, updatedAt, deletedAt
-	Username   string `gorm:"unique;not null" form:"user"`
+	Username   string `gorm:"unique;not null" form:"user" binding:"required"`
 	Posts      []Post
 }
 
