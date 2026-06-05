@@ -9,9 +9,9 @@
 <body>
     <h1>{{.title}}</h1>
     <form action="/posts/new" method="post">
-        <select name="user" id="user">
+        <select name="user_id" id="user_id">
         {{range .usersList}}
-            <option value="{{.Username}}" id="{{.Username}}">{{.Username}}</option>
+            <option value="{{.ID}}" id="{{.ID}}">{{.Username}}</option>
         {{end}}
         </select>
         <br>

@@ -148,7 +148,7 @@ func TestMain(t *testing.T) {
 	t.Run("POST /posts/new z pustym polem title", func(t *testing.T) {
 		//dane do testowego "formularza"
 		formData := url.Values{}
-		formData.Set("user", "0")
+		formData.Set("user", "1")
 		formData.Set("title", "")
 		formData.Set("body", "test_body")
 		body := strings.NewReader(formData.Encode())

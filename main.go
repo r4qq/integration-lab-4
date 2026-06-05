@@ -22,8 +22,8 @@ type Post struct {
 	gorm.Model        // dodaje automatycznie pola id, createdAt, updatedAt, deletedAt
 	Title      string `gorm:"type:text;not null" form:"title" binding:"required"`
 	Body       string `gorm:"type:text;not null" form:"body"  binding:"required"`
-	UserID     uint
-	Author     User `gorm:"foreignKey:UserID"`
+	UserID     uint   `form:"user_id" binding:"required"`
+	Author     User   `gorm:"foreignKey:UserID" form:"-" binding:"-"`
 }
 
 // struktura będąca jednocześnie modelem użytkownika dla db
@@ -243,7 +243,6 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		// Jeśli środowisko nie podało portu (np. na Twoim komputerze), użyj domyślnego
 		port = "8000"
 	}
 
